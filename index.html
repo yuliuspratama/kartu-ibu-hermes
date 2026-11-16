@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Ulang Tahun, Ibu Tercinta ♥</title>
+<meta name="description" content="Kartu ucapan ulang tahun untuk ibu tercinta, 21 November.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f1e8;
+    --paper: #fffdf8;
+    --ink: #3d2b2b;
+    --muted: #8a6f68;
+    --rose: #b4536b;
+    --rose-deep: #8e3a52;
+    --gold: #c9a25e;
+    --line: #e6dac9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background:
+      radial-gradient(1200px 800px at 15% 10%, #fdf8ee 0%, transparent 60%),
+      radial-gradient(1000px 700px at 85% 90%, #f6e9e4 0%, transparent 55%),
+      var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    padding: 24px;
+  }
+
+  /* ---------- kelopak jatuh ---------- */
+  .petals { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+  .petal {
+    position: absolute;
+    top: -4vh;
+    width: 14px; height: 14px;
+    background: linear-gradient(135deg, #e8a9b8, #d47a92);
+    border-radius: 14px 2px 14px 2px;
+    opacity: .55;
+    animation: fall linear infinite;
+  }
+  .petal.gold { background: linear-gradient(135deg, #e9d4a8, #c9a25e); }
+  @keyframes fall {
+    0%   { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(108vh) rotate(560deg); }
+  }
+
+  /* ---------- amplop ---------- */
+  .stage { position: relative; z-index: 1; width: 100%; max-width: 560px; }
+  .envelope-wrap {
+    text-align: center;
+    perspective: 1400px;
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .envelope-wrap.opened {
+    opacity: 0; transform: translateY(-30px) scale(.96);
+    pointer-events: none; position: absolute; inset: 0;
+  }
+  .envelope {
+    width: min(92vw, 460px);
+    height: min(60vw, 300px);
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform .5s ease;
+  }
+  .envelope:hover { transform: translateY(-6px); }
+  .envelope-body {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, #fdf6ea, #f3e3cf);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 30px 60px -25px rgba(90, 50, 50, .35);
+  }
+  .envelope-flap {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 52%;
+    background: linear-gradient(180deg, #f3e3cf, #ecdcC2);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid var(--line);
+    transform-origin: top center;
+    transition: transform .5s ease;
+  }
+  .envelope:hover .envelope-flap { transform: rotateX(14deg); }
+  .envelope-seal {
+    position: absolute; top: 44%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px; height: 64px;
+    background: radial-gradient(circle at 35% 30%, var(--rose), var(--rose-deep));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: #fff;
+    box-shadow: 0 6px 18px rgba(142, 58, 82, .45), inset 0 0 0 3px rgba(255,255,255,.18);
+    font-family: 'Great Vibes', cursive;
+  }
+  .envelope-label {
+    margin-top: 26px;
+    font-size: 21px;
+    font-style: italic;
+    color: var(--muted);
+    letter-spacing: .4px;
+  }
+  .envelope-label strong { color: var(--rose-deep); font-weight: 600; }
+  .tap-hint {
+    margin-top: 10px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #b09a8c;
+  }
+
+  /* ---------- kartu ---------- */
+  .card {
+    opacity: 0;
+    transform: translateY(50px) scale(.95);
+    transition: opacity .9s ease .3s, transform .9s cubic-bezier(.2,.8,.3,1) .3s;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .card.shown { opacity: 1; transform: none; }
+  .card-inner {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: clamp(36px, 7vw, 72px) clamp(24px, 6vw, 64px);
+    text-align: center;
+    box-shadow: 0 40px 80px -30px rgba(90, 50, 50, .35);
+    overflow: hidden;
+  }
+  .card-inner::before, .card-inner::after {
+    content: "";
+    position: absolute;
+    width: 42px; height: 42px;
+    border: 1px solid var(--gold);
+    opacity: .6;
+  }
+  .card-inner::before { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+  .card-inner::after  { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+
+  .eyebrow {
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    font-size: clamp(44px, 9vw, 72px);
+    line-height: 1.15;
+    color: var(--rose-deep);
+    margin-bottom: 6px;
+  }
+  .date-line {
+    font-size: clamp(18px, 3.5vw, 24px);
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .date-line .heart { color: var(--rose); }
+  .divider {
+    width: 120px; height: 1px;
+    margin: 26px auto;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    position: relative;
+  }
+  .divider::after {
+    content: "❦";
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -52%);
+    background: var(--paper);
+    padding: 0 10px;
+    color: var(--gold);
+    font-size: 15px;
+  }
+  .message {
+    font-size: clamp(18px, 3.4vw, 21px);
+    line-height: 1.85;
+    color: var(--ink);
+    max-width: 52ch;
+    margin: 0 auto;
+  }
+  .message p + p { margin-top: 14px; }
+  .message em { color: var(--rose-deep); }
+
+  .signature {
+    margin-top: 34px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 34px;
+    color: var(--rose);
+  }
+  .signature small {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ---------- lilin ---------- */
+  .candle-row {
+    margin: 36px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .candle {
+    width: 14px;
+    border-radius: 4px 4px 2px 2px;
+    background: repeating-linear-gradient(45deg, #f6e7d8 0 6px, #f0d7c2 6px 12px);
+    position: relative;
+    cursor: pointer;
+  }
+  .candle::before {
+    content: "";
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    width: 8px; height: 12px;
+    background: radial-gradient(circle at 50% 70%, #ffd66b, #f59e2d 60%, rgba(245,158,45,0) 75%);
+    border-radius: 50% 50% 40% 40%;
+    animation: flicker 1.6s ease-in-out infinite;
+  }
+  .candle.out::before { content: none; }
+  .candle::after {
+    content: "";
+    position: absolute;
+    top: -9px; left: 50%;
+    width: 1.5px; height: 9px;
+    background: #6b4a35;
+    transform: translateX(-50%);
+  }
+  @keyframes flicker {
+    0%, 100% { transform: translateX(-50%) scale(1) translateY(0); opacity: 1; }
+    30% { transform: translateX(-50%) scale(1.08, .94) translateY(-1px); opacity: .92; }
+    60% { transform: translateX(-50%) scale(.94, 1.06) translateY(1px); opacity: 1; }
+  }
+  .candle-hint {
+    margin-top: 14px;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--muted);
+    min-height: 20px;
+  }
+  .all-out {
+    margin-top: 10px;
+    font-size: 17px;
+    color: var(--rose-deep);
+    opacity: 0;
+    transition: opacity .8s ease;
+  }
+  .all-out.shown { opacity: 1; }
+
+  /* ---------- konfeti ---------- */
+  .confetti { position: fixed; top: -10px; z-index: 50; pointer-events: none; }
+  .confetti i {
+    position: absolute;
+    display: block;
+    width: 9px; height: 14px;
+    animation: drop ease-in forwards;
+  }
+  @keyframes drop {
+    to { transform: translateY(105vh) rotate(720deg); opacity: .9; }
+  }
+
+  /* ---------- countdown ---------- */
+  .countdown {
+    margin-top: 40px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: var(--muted);
+  }
+  .countdown strong { color: var(--rose-deep); font-size: 17px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .petal, .candle::before { animation: none; }
+    .envelope:hover { transform: none; }
+    .card, .envelope-wrap { transition-duration: .01s; }
+  }
+</style>
+</head>
+<body>
+
+<div class="petals" id="petals" aria-hidden="true"></div>
+
+<main class="stage">
+
+  <!-- AMPLOP -->
+  <div class="envelope-wrap" id="envelopeWrap">
+    <div class="envelope" id="envelope" role="button" tabindex="0"
+         aria-label="Buka kartu ucapan untuk Ibu">
+      <div class="envelope-body"></div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-seal">Y</div>
+    </div>
+    <p class="envelope-label">Untuk <strong>Ibu Tercinta</strong></p>
+    <p class="tap-hint">— sentuh untuk membuka —</p>
+  </div>
+
+  <!-- KARTU -->
+  <article class="card" id="card" aria-label="Kartu ucapan ulang tahun">
+    <div class="card-inner">
+      <p class="eyebrow">21 November</p>
+      <h1>Selamat Ulang Tahun, Ibu</h1>
+      <p class="date-line">21 November 1973 <span class="heart">♥</span> kini genap <span id="age">53</span> tahun</p>
+
+      <div class="divider"></div>
+
+      <div class="message">
+        <p>Ibu, terima kasih untuk setiap doa yang tak pernah putus, setiap pelukan yang menjadikan rumah terasa hangat, dan setiap pengorbanan yang sering tak pernah Ibu sebut.</p>
+        <p>Semoga di hari istimewa ini dan setelahnya, Allah selalu menjaga kesehatan Ibu, melimpahkan kebahagiaan, dan membalut Ibu dengan cinta sebesar cinta yang Ibu berikan kepada kami.</p>
+        <p><em>Selamat ulang tahun, Ibu. Kami menyayangi Ibu, hari ini, besok, dan selamanya.</em></p>
+      </div>
+
+      <p class="signature">— Yuli
+        <small>dengan segenap cinta &amp; doa</small>
+      </p>
+
+      <div class="candle-row" id="candles"></div>
+      <p class="candle-hint" id="candleHint">Tiup lilinnya — sentuh satu per satu 🕯️</p>
+      <p class="all-out" id="allOut">Semoga semua harapan Ibu terkabul. Aamiin 🤲</p>
+
+      <div class="countdown" id="countdown"></div>
+    </div>
+  </article>
+
+</main>
+
+<script>
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- kelopak --- */
+  var petalColors = ['', ' gold'];
+  var petals = document.getElementById('petals');
+  if (!reduceMotion) {
+    for (var i = 0; i < 14; i++) {
+      var p = document.createElement('div');
+      p.className = 'petal' + petalColors[i % 2];
+      p.style.left = (Math.random() * 100) + 'vw';
+      p.style.animationDuration = (9 + Math.random() * 9) + 's';
+      p.style.animationDelay = (-Math.random() * 18) + 's';
+      p.style.transform = 'scale(' + (0.6 + Math.random() * 0.8) + ')';
+      petals.appendChild(p);
+    }
+  }
+
+  /* --- usia otomatis --- */
+  function ageOn(birthday, today) {
+    var a = 0;
+    var y = today.getFullYear() - birthday.getFullYear();
+    var before =
+      today.getMonth() < birthday.getMonth() ||
+      (today.getMonth() === birthday.getMonth() && today.getDate() < birthday.getDate());
+    a = before ? y - 1 : y;
+    return a;
+  }
+  var now = new Date();
+  var age = ageOn(new Date(1973, 10, 21), now); // bulan 10 = November (0-based)
+  document.getElementById('age').textContent = age;
+
+  /* --- buka amplop --- */
+  var wrap = document.getElementById('envelopeWrap');
+  var card = document.getElementById('card');
+  function openCard() {
+    if (wrap.classList.contains('opened')) return;
+    wrap.classList.add('opened');
+    card.classList.add('shown');
+  }
+  document.getElementById('envelope').addEventListener('click', openCard);
+  document.getElementById('envelope').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCard(); }
+  });
+
+  /* --- lilin: 5 batang, tiup satu per satu --- */
+  var row = document.getElementById('candles');
+  var candles = [];
+  var heights = [58, 84, 68, 92, 74];
+  heights.forEach(function (h) {
+    var c = document.createElement('div');
+    c.className = 'candle';
+    c.style.height = h + 'px';
+    c.setAttribute('role', 'button');
+    c.setAttribute('tabindex', '0');
+    c.setAttribute('aria-label', 'Tiup lilin');
+    row.appendChild(c);
+    candles.push(c);
+  });
+  var remaining = candles.length;
+  var hint = document.getElementById('candleHint');
+  var allOut = document.getElementById('allOut');
+  function blow(c) {
+    if (c.classList.contains('out')) return;
+    c.classList.remove('out');
+    void c.offsetWidth; /* restart animasi keyframes */
+    c.classList.add('out');
+    remaining--;
+    if (remaining === 0) {
+      hint.textContent = 'Semua lilin sudah padam ✨';
+      allOut.classList.add('shown');
+      burstConfetti();
+    } else {
+      hint.textContent = remaining + ' lilin lagi…';
+    }
+  }
+  candles.forEach(function (c) {
+    c.addEventListener('click', function () { blow(c); });
+    c.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); blow(c); }
+    });
+  });
+
+  /* --- konfeti --- */
+  var colors = ['#b4536b', '#c9a25e', '#e8a9b8', '#8e3a52', '#f3e3cf'];
+  function burstConfetti() {
+    if (reduceMotion) return;
+    var box = document.createElement('div');
+    box.className = 'confetti';
+    box.style.left = '50%';
+    document.body.appendChild(box);
+    for (var i = 0; i < 60; i++) {
+      var bit = document.createElement('i');
+      bit.style.left = (Math.random() * 240 - 120) + 'px';
+      bit.style.top = (Math.random() * 60 - 30) + 'px';
+      bit.style.background = colors[i % colors.length];
+      bit.style.animationDuration = (1.6 + Math.random() * 1.6) + 's';
+      bit.style.animationDelay = (Math.random() * .5) + 's';
+      if (Math.random() > .5) bit.style.borderRadius = '50%';
+      box.appendChild(bit);
+    }
+    setTimeout(function () { box.remove(); }, 4000);
+  }
+
+  /* --- countdown / status hari-H --- */
+  var cd = document.getElementById('countdown');
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function tick() {
+    var t = new Date();
+    var target = new Date(t.getFullYear(), 10, 21, 0, 0, 0);
+    if (t.getMonth() === 10 && t.getDate() === 21) {
+      cd.innerHTML = 'Hari ini adalah hari Ibu — <strong>Selamat ulang tahun!</strong> ♥';
+      return;
+    }
+    if (t > target) target = new Date(t.getFullYear() + 1, 10, 21);
+    var ms = target - t;
+    var d = Math.floor(ms / 864e5);
+    var h = Math.floor(ms % 864e5 / 36e5);
+    var m = Math.floor(ms % 36e5 / 6e4);
+    var s = Math.floor(ms % 6e4 / 1e3);
+    cd.innerHTML = d + ' hari lagi menuju hari istimewa Ibu — ' +
+      '<strong>' + pad(h) + ':' + pad(m) + ':' + pad(s) + '</strong>';
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
