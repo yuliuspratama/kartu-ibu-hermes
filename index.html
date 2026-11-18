@@ -30,11 +30,12 @@
     color: var(--ink);
     min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
     overflow-x: hidden;
     padding: 24px;
   }
+  /* margin:auto (bukan align-items:center) supaya konten yang lebih tinggi
+     dari layar tidak terpotong di atas viewport dan tetap bisa discroll */
+  .stage { margin: auto; }
 
   /* ---------- kelopak jatuh ---------- */
   .petals { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
@@ -121,13 +122,18 @@
 
   /* ---------- kartu ---------- */
   .card {
-    opacity: 0;
-    transform: translateY(50px) scale(.95);
-    transition: opacity .9s ease .3s, transform .9s cubic-bezier(.2,.8,.3,1) .3s;
+    display: none; /* belum dibuka: tidak menempati ruang halaman */
     max-width: 640px;
     margin: 0 auto;
   }
-  .card.shown { opacity: 1; transform: none; }
+  .card.shown {
+    display: block;
+    animation: cardIn .9s cubic-bezier(.2,.8,.3,1) .2s both;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(40px) scale(.96); }
+    to   { opacity: 1; transform: none; }
+  }
   .card-inner {
     position: relative;
     background: var(--paper);
@@ -383,6 +389,10 @@
     if (wrap.classList.contains('opened')) return;
     wrap.classList.add('opened');
     card.classList.add('shown');
+    /* gulir halus ke kartu (lilin di bawah kartu perlu dijangkau) */
+    setTimeout(function () {
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 120);
   }
   document.getElementById('envelope').addEventListener('click', openCard);
   document.getElementById('envelope').addEventListener('keydown', function (e) {
